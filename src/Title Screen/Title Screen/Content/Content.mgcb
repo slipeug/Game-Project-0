@@ -61,3 +61,24 @@
 /processorParam:TextureFormat=Color
 /build:4.png
 
+#begin Cownaffle-X3x4j.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Cownaffle-X3x4j.spritefont
+
+#begin DragonHunter-9Ynxj.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:DragonHunter-9Ynxj.spritefont
+
+#begin SamuraiBlast-YznGj.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:SamuraiBlast-YznGj.spritefont
+
