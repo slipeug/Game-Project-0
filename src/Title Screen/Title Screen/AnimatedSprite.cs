@@ -43,11 +43,11 @@ namespace TitleScreen
             }
         }
 
-        public void Draw (SpriteBatch spriteBatch)
+        public void Draw (SpriteBatch spriteBatch, float scale = 1f)
         {
             Rectangle sourceRec = new Rectangle(currentFrame * texture.Height, 0, texture.Height, texture.Height);
 
-            spriteBatch.Draw(texture, position, sourceRec, Color.White);
+            spriteBatch.Draw(texture, position, sourceRec, Color.White, 0f, new Vector2(0f,0f), scale, SpriteEffects.None, 0);
         }
 
     }
