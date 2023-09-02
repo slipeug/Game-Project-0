@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace TitleScreen
 {
-    public class Skull : AnimatedSprite
+    public class Gem : AnimatedSprite
     {
         public void LoadContent(ContentManager content)
         {
-            base.position = new Vector2(315, 170);
-            base.LoadContent(content, "catrina", 0.07f);
+            base.position = new Vector2(840, 175);
+            base.LoadContent(content, "icons8-sparkling-diamond", 0.03f);
         }
 
         public void Update(GameTime gameTime)
@@ -23,10 +22,9 @@ namespace TitleScreen
             base.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw (SpriteBatch spriteBatch)
         {
-            float scale = 0.19f;
-            base.Draw(spriteBatch, Color.Orange, scale);
+            base.Draw(spriteBatch, Color.White, 0.8f);
         }
     }
 }

@@ -73,12 +73,12 @@
 /processorParam:TextureFormat=Color
 /build:catrina.png
 
-#begin Cownaffle-X3x4j.spritefont
+#begin Cownaffle.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Cownaffle-X3x4j.spritefont
+/build:Cownaffle.spritefont
 
 #begin icons8-sparkling-diamond.png
 /importer:TextureImporter
@@ -92,12 +92,19 @@
 /processorParam:TextureFormat=Color
 /build:icons8-sparkling-diamond.png
 
-#begin SamuraiBlast-YznGj.spritefont
+#begin SamuraiBlast.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:SamuraiBlast-YznGj.spritefont
+/build:SamuraiBlast.spritefont
+
+#begin SamuraiBlastBig.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:SamuraiBlastBig.spritefont
 
 #begin spider.png
 /importer:TextureImporter

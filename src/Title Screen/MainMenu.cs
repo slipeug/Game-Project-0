@@ -21,14 +21,16 @@ namespace TitleScreen
         private const int BIG_SHADOW_PX = 5;
 
         private SpriteFont _instructions;
-        private SpriteFont _gameName;
+        private SpriteFont _gameName1;
+        private SpriteFont _gameName2;
 
 
 
         public void LoadContent(ContentManager content)
         {
-            _gameName = content.Load<SpriteFont>("SamuraiBlast-YznGj");
-            _instructions = content.Load<SpriteFont>("Cownaffle-X3x4j");
+            _gameName1 = content.Load<SpriteFont>("SamuraiBlastBig");
+            _gameName2 = content.Load<SpriteFont>("SamuraiBlast");
+            _instructions = content.Load<SpriteFont>("Cownaffle");
 
         }
 
@@ -40,21 +42,21 @@ namespace TitleScreen
         {
             #region Title
 
-            Vector2 textSize1 = _gameName.MeasureString(GAME_TITLE_1);
-            Vector2 textSize2 = _gameName.MeasureString(GAME_TITLE_2);
+            Vector2 textSize1 = _gameName1.MeasureString(GAME_TITLE_1);
+            Vector2 textSize2 = _gameName2.MeasureString(GAME_TITLE_2);
 
             // Calculate the position to center the text on the screen
             float positionX1 = (GlobalVariables.WINDOW_WIDTH - textSize1.X) / 2;
             float positionX2 = (GlobalVariables.WINDOW_WIDTH - textSize2.X) / 2;
             float positionY1 = (GlobalVariables.WINDOW_HEIGHT - textSize1.Y) / 4 * 1;
-            float positionY2 = (GlobalVariables.WINDOW_HEIGHT - textSize2.Y) / 4 * 2;
+            float positionY2 = (GlobalVariables.WINDOW_HEIGHT - textSize2.Y) / 10 * 6;
 
             // game name shadow
-            spriteBatch.DrawString(_gameName, GAME_TITLE_1, new Vector2(positionX1, positionY1 + BIG_SHADOW_PX), Color.Black);
-            spriteBatch.DrawString(_gameName, GAME_TITLE_2, new Vector2(positionX2, positionY2 + BIG_SHADOW_PX), Color.Black);
+            spriteBatch.DrawString(_gameName1, GAME_TITLE_1, new Vector2(positionX1, positionY1 + BIG_SHADOW_PX), Color.Black);
+            spriteBatch.DrawString(_gameName2, GAME_TITLE_2, new Vector2(positionX2, positionY2 + BIG_SHADOW_PX), Color.Black);
             // game name 
-            spriteBatch.DrawString(_gameName, GAME_TITLE_1, new Vector2(positionX1, positionY1), Color.DeepSkyBlue);
-            spriteBatch.DrawString(_gameName, GAME_TITLE_2, new Vector2(positionX2, positionY2), Color.SandyBrown);
+            spriteBatch.DrawString(_gameName1, GAME_TITLE_1, new Vector2(positionX1, positionY1), Color.DeepSkyBlue);
+            spriteBatch.DrawString(_gameName2, GAME_TITLE_2, new Vector2(positionX2, positionY2), Color.SandyBrown);
 
             #endregion
 
