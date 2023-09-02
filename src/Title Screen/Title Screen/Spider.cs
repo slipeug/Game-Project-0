@@ -28,7 +28,7 @@ namespace TitleScreen
         public void Draw(SpriteBatch spriteBatch)
         {
             float scale = 0.15f;
-            base.Draw(spriteBatch, scale);
+            base.Draw(spriteBatch, Color.White, scale);
 
             Vector2 origin = new Vector2(
                 base.position.X + base.texture.Width / 2 * scale, 

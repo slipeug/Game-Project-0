@@ -61,6 +61,18 @@
 /processorParam:TextureFormat=Color
 /build:4.png
 
+#begin catrina.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,255,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:catrina.png
+
 #begin Cownaffle-X3x4j.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

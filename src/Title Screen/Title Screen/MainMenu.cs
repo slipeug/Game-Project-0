@@ -24,6 +24,7 @@ namespace TitleScreen
         private SpriteFont _gameName;
 
 
+
         public void LoadContent(ContentManager content)
         {
             _gameName = content.Load<SpriteFont>("SamuraiBlast-YznGj");
@@ -33,7 +34,6 @@ namespace TitleScreen
 
         public void Update(GameTime gameTime)
         {
-            
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -53,8 +53,8 @@ namespace TitleScreen
             spriteBatch.DrawString(_gameName, GAME_TITLE_1, new Vector2(positionX1, positionY1 + BIG_SHADOW_PX), Color.Black);
             spriteBatch.DrawString(_gameName, GAME_TITLE_2, new Vector2(positionX2, positionY2 + BIG_SHADOW_PX), Color.Black);
             // game name 
-            spriteBatch.DrawString(_gameName, GAME_TITLE_1, new Vector2(positionX1, positionY1), Color.SandyBrown);
-            spriteBatch.DrawString(_gameName, GAME_TITLE_2, new Vector2(positionX2, positionY2), Color.DeepSkyBlue);
+            spriteBatch.DrawString(_gameName, GAME_TITLE_1, new Vector2(positionX1, positionY1), Color.DeepSkyBlue);
+            spriteBatch.DrawString(_gameName, GAME_TITLE_2, new Vector2(positionX2, positionY2), Color.SandyBrown);
 
             #endregion
 
@@ -82,6 +82,7 @@ namespace TitleScreen
                 new Vector2(positionX, positionY), 
                 Color.White * transparancy
             );
+
 
             #endregion
         }

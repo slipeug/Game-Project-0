@@ -22,6 +22,7 @@ namespace TitleScreen
 
         private Gem _gem;
         private Spider _spider;
+        private Skull _skull;
 
 
         public TitleScreen()
@@ -37,6 +38,7 @@ namespace TitleScreen
             _mainMenu = new MainMenu();
             _gem = new Gem();
             _spider = new Spider();
+            _skull = new Skull();
             
             // Set the desired window size here
             _graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // Width in pixels
@@ -53,6 +55,7 @@ namespace TitleScreen
             _background.LoadContent(Content);
             _gem.LoadContent(Content);
             _spider.LoadContent(Content);
+            _skull.LoadContent(Content);
         }
 
         protected override void Update(GameTime gameTime)
@@ -63,6 +66,7 @@ namespace TitleScreen
             _background.Update(gameTime);
             _gem.Update(gameTime);
             _spider.Update(gameTime);
+            _skull.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -72,11 +76,15 @@ namespace TitleScreen
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
+            
             _background.Draw(_spriteBatch);
             _mainMenu.Draw(gameTime, _spriteBatch);
             _gem.Draw(_spriteBatch);
             _spider.Draw(_spriteBatch);
+            _skull.Draw(_spriteBatch);
+
             _spriteBatch.End();
+
 
             base.Draw(gameTime);
         }

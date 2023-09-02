@@ -13,10 +13,11 @@ namespace TitleScreen
 {
     public class AnimatedSprite
     {
+
+
         protected Vector2 position = new Vector2(20, 20);
         protected Texture2D texture;
 
-        //private Vector2 sourceRectangle;
         private int frameCount;
         private int currentFrame;
         private float timeSinceLastFrame;
@@ -43,11 +44,13 @@ namespace TitleScreen
             }
         }
 
-        public void Draw (SpriteBatch spriteBatch, float scale = 1f)
+        public void Draw (SpriteBatch spriteBatch, Color color = default(Color), float scale = 1f)
         {
-            Rectangle sourceRec = new Rectangle(currentFrame * texture.Height, 0, texture.Height, texture.Height);
+            if (color == default(Color))
+                color = Color.White;
 
-            spriteBatch.Draw(texture, position, sourceRec, Color.White, 0f, new Vector2(0f,0f), scale, SpriteEffects.None, 0);
+            Rectangle sourceRec = new Rectangle(currentFrame * texture.Height, 0, texture.Height, texture.Height);
+            spriteBatch.Draw(texture, position, sourceRec, color, 0f, new Vector2(0f,0f), scale, SpriteEffects.None, 0);
         }
 
     }
