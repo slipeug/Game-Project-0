@@ -41,7 +41,7 @@ namespace TitleScreen
             clouds3Pos = (float) Math.Cos(gameTime.TotalGameTime.TotalSeconds + 10) * 10;
         }
 
-        public void Draw (GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw (SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(mainBackground, new Vector2(0, 0), null, Color.White, 0f, new Vector2 (0,0), 2f, SpriteEffects.None, 0);
             spriteBatch.Draw(clouds1, new Vector2(clouds1Pos, 0), null, Color.White, 0f, new Vector2(20, 30), 2.3f, SpriteEffects.None, 1);

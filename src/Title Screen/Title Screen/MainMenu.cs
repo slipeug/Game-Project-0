@@ -29,11 +29,12 @@ namespace TitleScreen
             _gameName = content.Load<SpriteFont>("SamuraiBlast-YznGj");
             //_gameName = content.Load<SpriteFont>("DragonHunter-9Ynxj");
             _instructions = content.Load<SpriteFont>("Cownaffle-X3x4j");
+
         }
 
         public void Update(GameTime gameTime)
         {
-
+            
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -53,8 +54,8 @@ namespace TitleScreen
             spriteBatch.DrawString(_gameName, GAME_TITLE_1, new Vector2(positionX1, positionY1 + BIG_SHADOW_PX), Color.Black);
             spriteBatch.DrawString(_gameName, GAME_TITLE_2, new Vector2(positionX2, positionY2 + BIG_SHADOW_PX), Color.Black);
             // game name 
-            spriteBatch.DrawString(_gameName, "Cursed", new Vector2(positionX1, positionY1), Color.BlueViolet);
-            spriteBatch.DrawString(_gameName, "Island", new Vector2(positionX2, positionY2), Color.BlueViolet);
+            spriteBatch.DrawString(_gameName, GAME_TITLE_1, new Vector2(positionX1, positionY1), Color.SandyBrown);
+            spriteBatch.DrawString(_gameName, GAME_TITLE_2, new Vector2(positionX2, positionY2), Color.DeepSkyBlue);
 
             #endregion
 

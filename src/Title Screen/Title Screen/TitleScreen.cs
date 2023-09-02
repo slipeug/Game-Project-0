@@ -19,6 +19,10 @@ namespace TitleScreen
         private MainMenu _mainMenu;
         private Background _background;
 
+
+        private Gem _gem;
+
+
         public TitleScreen()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -30,6 +34,7 @@ namespace TitleScreen
         {
             _background = new Background();
             _mainMenu = new MainMenu();
+            _gem = new Gem();
             
             // Set the desired window size here
             _graphics.PreferredBackBufferWidth = GlobalVariables.WINDOW_WIDTH; // Width in pixels
@@ -44,6 +49,7 @@ namespace TitleScreen
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _mainMenu.LoadContent(Content);
             _background.LoadContent(Content);
+            _gem.LoadContent(Content);
 
         }
 
@@ -53,6 +59,7 @@ namespace TitleScreen
                 Exit();
 
             _background.Update(gameTime);
+            _gem.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -62,8 +69,9 @@ namespace TitleScreen
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            _background.Draw(gameTime, _spriteBatch);
+            _background.Draw(_spriteBatch);
             _mainMenu.Draw(gameTime, _spriteBatch);
+            _gem.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

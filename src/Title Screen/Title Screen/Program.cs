@@ -1,3 +1,2 @@
-﻿
-using var game = new TitleScreen.TitleScreen();
+﻿using var game = new TitleScreen.TitleScreen();
 game.Run();
