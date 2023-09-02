@@ -27,7 +27,6 @@ namespace TitleScreen
         public void LoadContent(ContentManager content)
         {
             _gameName = content.Load<SpriteFont>("SamuraiBlast-YznGj");
-            //_gameName = content.Load<SpriteFont>("DragonHunter-9Ynxj");
             _instructions = content.Load<SpriteFont>("Cownaffle-X3x4j");
 
         }

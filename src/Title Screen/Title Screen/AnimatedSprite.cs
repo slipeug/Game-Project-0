@@ -14,7 +14,7 @@ namespace TitleScreen
     public class AnimatedSprite
     {
         protected Vector2 position = new Vector2(20, 20);
-        private Texture2D texture;
+        protected Texture2D texture;
 
         //private Vector2 sourceRectangle;
         private int frameCount;

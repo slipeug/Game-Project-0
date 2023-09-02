@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System.Reflection.Metadata;
 
 namespace TitleScreen
 {
@@ -26,7 +27,17 @@ namespace TitleScreen
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch, 0.15f);
+            float scale = 0.15f;
+            base.Draw(spriteBatch, scale);
+
+            Vector2 origin = new Vector2(
+                base.position.X + base.texture.Width / 2 * scale, 
+                base.position.Y + base.texture.Height / 2 * scale
+            );
+            ShapesDrawingHelper.DrawLine(
+                spriteBatch, origin, new Vector2(base.position.X + base.texture.Width / 2 * scale, 0f), Color.Black, 2
+            );
+
         }
     }
 }
