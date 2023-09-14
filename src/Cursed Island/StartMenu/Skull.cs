@@ -9,14 +9,14 @@ using Microsoft.Xna.Framework;
 using static System.Formats.Asn1.AsnWriter;
 using Microsoft.Xna.Framework.Input;
 
-namespace TitleScreen
+namespace CursedIsland.StartMenu
 {
     public class Skull : AnimatedSprite
     {
         public void LoadContent(ContentManager content)
         {
-            base.position = new Vector2(295, 245);
-            base.LoadContent(content, "catrina", 0.07f);
+            position = new Vector2(295, 245);
+            LoadContent(content, "catrina", 0.07f);
         }
 
         public void Update(GameTime gameTime)
@@ -27,7 +27,7 @@ namespace TitleScreen
         public void Draw(SpriteBatch spriteBatch)
         {
             float scale = 0.23f;
-            base.Draw(spriteBatch, Color.Orange, scale);
+            Draw(spriteBatch, Color.Orange, scale);
         }
     }
 }

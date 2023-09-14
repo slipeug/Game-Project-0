@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 
 
-namespace TitleScreen
+namespace CursedIsland
 {
     // code taken from the https://community.monogame.net/t/line-drawing/6962
     public static class ShapesDrawingHelper

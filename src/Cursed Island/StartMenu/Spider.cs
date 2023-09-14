@@ -8,19 +8,19 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Reflection.Metadata;
 
-namespace TitleScreen
+namespace CursedIsland.StartMenu
 {
     public class Spider : AnimatedSprite
     {
         public void LoadContent(ContentManager content)
         {
-            base.LoadContent(content, "spider", 100f);
+            LoadContent(content, "spider", 100f);
         }
 
         public void Update(GameTime gameTime)
         {
-            float heightDiff = - (float) Math.Cos(gameTime.TotalGameTime.TotalSeconds) * 100;
-            base.position = new Vector2(1000, heightDiff);
+            float heightDiff = -(float)Math.Cos(gameTime.TotalGameTime.TotalSeconds) * 100;
+            position = new Vector2(1000, heightDiff);
 
             base.Update(gameTime);
         }
@@ -28,14 +28,14 @@ namespace TitleScreen
         public void Draw(SpriteBatch spriteBatch)
         {
             float scale = 0.15f;
-            base.Draw(spriteBatch, Color.White, scale);
+            Draw(spriteBatch, Color.White, scale);
 
             Vector2 origin = new Vector2(
-                base.position.X + base.texture.Width / 2 * scale, 
-                base.position.Y + base.texture.Height / 2 * scale
+                position.X + texture.Width / 2 * scale,
+                position.Y + texture.Height / 2 * scale
             );
-            ShapesDrawingHelper.DrawLine(
-                spriteBatch, origin, new Vector2(base.position.X + base.texture.Width / 2 * scale, 0f), Color.Black, 2
+            spriteBatch.DrawLine(
+origin, new Vector2(position.X + texture.Width / 2 * scale, 0f), Color.Black, 2
             );
 
         }

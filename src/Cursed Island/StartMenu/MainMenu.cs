@@ -9,12 +9,12 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Reflection.Metadata;
 using static System.Net.Mime.MediaTypeNames;
 
-
-namespace TitleScreen
+namespace CursedIsland.StartMenu
 {
     public class MainMenu
     {
-        private const string INSTRUCTIONS_TEXT = "Press ESC or BACK button to leave the game";
+        private const string INSTRUCTIONS_TEXT_1 = "Press ENTER to start the game or";
+        private const string INSTRUCTIONS_TEXT_2 = "press ESC or BACK button to leave the game";
         private const string GAME_TITLE_1 = "Cursed";
         private const string GAME_TITLE_2 = "Island";
         private const int SHADOW_PX = 2;
@@ -60,31 +60,49 @@ namespace TitleScreen
 
             #endregion
 
-
             #region Instructions
 
-            Vector2 textSize = _instructions.MeasureString(INSTRUCTIONS_TEXT);
+            Vector2 instructionSize_1 = _instructions.MeasureString(INSTRUCTIONS_TEXT_1);
+            Vector2 instructionSize_2 = _instructions.MeasureString(INSTRUCTIONS_TEXT_2);
 
             // Calculate the position to center the text on the screen
-            float positionX = (GlobalVariables.WINDOW_WIDTH - textSize.X) / 2;
-            float positionY = (GlobalVariables.WINDOW_HEIGHT - textSize.Y) / 8 * 7;
+            float position_1_X = (GlobalVariables.WINDOW_WIDTH - instructionSize_1.X) / 2;
+            float position_1_Y = (GlobalVariables.WINDOW_HEIGHT - instructionSize_1.Y) / 9 * 7;
 
             float transparancy = 2 * (float)Math.Cos(gameTime.TotalGameTime.TotalSeconds * 5) + 2;
             // instructions shadow
             spriteBatch.DrawString(
-                _instructions, 
-                INSTRUCTIONS_TEXT, 
-                new Vector2(positionX + SHADOW_PX, positionY + SHADOW_PX), 
+                _instructions,
+                INSTRUCTIONS_TEXT_1,
+                new Vector2(position_1_X + SHADOW_PX, position_1_Y + SHADOW_PX),
                 Color.Black * transparancy
             );
             // instructions
             spriteBatch.DrawString(
-                _instructions, 
-                INSTRUCTIONS_TEXT, 
-                new Vector2(positionX, positionY), 
+                _instructions,
+                INSTRUCTIONS_TEXT_1,
+                new Vector2(position_1_X, position_1_Y),
                 Color.White * transparancy
             );
 
+
+            float position_2_X = (GlobalVariables.WINDOW_WIDTH - instructionSize_2.X) / 2;
+            float position_2_Y = (GlobalVariables.WINDOW_HEIGHT - instructionSize_2.Y) / 9 * 8;
+
+
+            spriteBatch.DrawString(
+                _instructions,
+                INSTRUCTIONS_TEXT_2,
+                new Vector2(position_2_X + SHADOW_PX, position_2_Y + SHADOW_PX),
+                Color.Black * transparancy
+            );
+            // instructions
+            spriteBatch.DrawString(
+                _instructions,
+                INSTRUCTIONS_TEXT_2,
+                new Vector2(position_2_X, position_2_Y),
+                Color.White * transparancy
+            );
 
             #endregion
         }
