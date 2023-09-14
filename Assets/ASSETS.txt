@@ -4,4 +4,5 @@
 - 1-4 background (https://craftpix.net/freebies/ocean-and-clouds-free-pixel-art-backgrounds/) - created by https://craftpix.net/ - Licence: https://craftpix.net/file-licenses/
 - Cownaffle - link: https://www.fontspace.com/cownaffle-font-f102267 - license: SIL Open Font License (OFL), see file attached
 - SamuraiBlast - link: https://www.fontspace.com/samurai-blast-font-f94192 - license: Demo
+- https://jesse-m.itch.io/jungle-pack
 

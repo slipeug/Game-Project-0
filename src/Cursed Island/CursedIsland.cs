@@ -1,4 +1,5 @@
 ﻿using CursedIsland.StartMenu;
+using CursedIsland.Level;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -37,9 +38,10 @@ namespace CursedIsland
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private InputManager _inputManager = new InputManager();
         private GameManager _gameManager;
         private TitleScreen titleScreen = new TitleScreen();
-        //private GameLevel gameLevel = new GameLevel();
+        private GameLevel gameLevel = new GameLevel();
 
         public CursedIsland()
         {
@@ -66,24 +68,27 @@ namespace CursedIsland
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             titleScreen.LoadContent(Content);
+            gameLevel.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            _inputManager.Update(gameTime);
+
+            if (_inputManager.Exit)
                 Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 _gameManager.Level = true;
 
             // TODO: Add your update logic here
 
             if (_gameManager.Menu)
-                titleScreen.Update(gameTime);
-            //else
-                //gameLevel.Update(gameTime);
+                titleScreen.Update(gameTime, _inputManager);
+            else
+                gameLevel.Update(gameTime, _inputManager);
 
             base.Update(gameTime);
         }
@@ -92,15 +97,14 @@ namespace CursedIsland
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-
-
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
 
             if (_gameManager.Menu)
                 titleScreen.Draw(_spriteBatch, gameTime);
-            //else
-                //gameLevel.Draw(_spriteBatch, gameTime);
+            else
+                gameLevel.Draw(_spriteBatch, gameTime);
 
+            _spriteBatch.End();
 
 
             base.Draw(gameTime);

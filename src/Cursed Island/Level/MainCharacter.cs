@@ -3,28 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
-namespace CursedIsland.StartMenu
+namespace CursedIsland.Level
 {
-    public class Gem : AnimatedSprite
+    public class MainCharacter : AnimatedSprite
     {
         public void LoadContent(ContentManager content)
         {
-            position = new Vector2(840, 175);
-            LoadContent(content, "icons8-sparkling-diamond", 0.03f);
+            LoadContent(content, "jungle_person", 0.1f, 8, 1);
         }
 
         public void Update(GameTime gameTime, InputManager inputManager)
         {
-            base.Update(gameTime);
+            float speed = 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            base.position += inputManager.Direction * speed;
+
+            base.Update(gameTime, inputManager);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Draw(spriteBatch, Color.White, 0.8f);
+            float scale = 3f;
+            Draw(spriteBatch, Color.White, scale);
         }
     }
 }

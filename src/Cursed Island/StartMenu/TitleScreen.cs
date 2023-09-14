@@ -43,7 +43,7 @@ namespace CursedIsland.StartMenu
             _skull.LoadContent(content);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, InputManager inputManager)
         {
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             //    Exit();
@@ -59,15 +59,12 @@ namespace CursedIsland.StartMenu
         {
             //GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-
             _background.Draw(spriteBatch);
             _mainMenu.Draw(gameTime, spriteBatch);
             _gem.Draw(spriteBatch);
             _spider.Draw(spriteBatch);
             _skull.Draw(spriteBatch);
 
-            spriteBatch.End();
 
         }
     }

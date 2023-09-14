@@ -10,7 +10,7 @@ namespace CursedIsland
     {
         public abstract void Initialize();
         public abstract void LoadContent(ContentManager content);
-        public abstract void Update(GameTime gameTime);
+        public abstract void Update(GameTime gameTime, InputManager inputManager);
         public abstract void Draw(SpriteBatch spriteBatch, GameTime gameTime);
     }
 }
