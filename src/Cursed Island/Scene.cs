@@ -8,9 +8,9 @@ namespace CursedIsland
 {
     public abstract class Scene
     {
-        public abstract void Initialize();
+        public abstract void Initialize(ContentManager content);
         public abstract void LoadContent(ContentManager content);
-        public abstract void Update(GameTime gameTime, InputManager inputManager);
-        public abstract void Draw(SpriteBatch spriteBatch, GameTime gameTime);
+        public abstract void Update(GameTime gameTime, GameManager gameManager, InputManager inputManager);
+        public abstract void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, GameTime gameTime);
     }
 }

@@ -13,7 +13,7 @@ namespace CursedIsland
 {
     public class AnimatedSprite
     {
-        protected Vector2 position = new Vector2(20, 20);
+        protected Vector2 position;
         protected Texture2D texture;
 
         private bool swapDirection = false;
@@ -65,7 +65,7 @@ namespace CursedIsland
             }
         }
 
-        public void Draw (SpriteBatch spriteBatch, Color color = default(Color), float scale = 1f)
+        public void Draw (GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Color color = default(Color), float scale = 1f)
         {
             if (color == default(Color))
                 color = Color.White;

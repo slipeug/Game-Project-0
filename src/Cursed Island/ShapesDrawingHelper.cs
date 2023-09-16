@@ -39,5 +39,21 @@ namespace CursedIsland
             var scale = new Vector2(length, thickness);
             spriteBatch.Draw(GetTexture(spriteBatch), point, null, color, angle, origin, scale, SpriteEffects.None, 0);
         }
+
+        public static void DrawSquare (GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Vector2 position, int width, int height)
+        {
+            Texture2D squareTexture = new Texture2D(graphicsDevice, 1, 1);
+            squareTexture.SetData(new Color[] { Color.White });
+
+
+            // Define the square's position and size
+            Rectangle squareRectangle = new Rectangle((int)position.X, (int)position.Y, width, height); // (x, y, width, height)
+
+            // Specify the color of the square (white in this case)
+            Color squareColor = Color.Red;
+
+            // Draw the square
+            spriteBatch.Draw(squareTexture, squareRectangle, squareColor);
+        }
     }
 }

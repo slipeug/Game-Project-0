@@ -24,10 +24,10 @@ namespace CursedIsland.StartMenu
             base.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
             float scale = 0.23f;
-            Draw(spriteBatch, Color.Orange, scale);
+            Draw(graphicsDevice, spriteBatch, Color.Orange, scale);
         }
     }
 }

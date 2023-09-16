@@ -22,9 +22,9 @@ namespace CursedIsland.StartMenu
             base.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
-            Draw(spriteBatch, Color.White, 0.8f);
+            Draw(graphicsDevice, spriteBatch, Color.White, 0.8f);
         }
     }
 }

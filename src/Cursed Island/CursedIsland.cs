@@ -6,10 +6,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace CursedIsland
 {
-    public struct GameManager
+    public class GameManager
     {
-        private bool menu;
-        private bool level;
+        private bool menu = true;
+        private bool level = false;
+        public bool restart = false;
 
         public bool Menu
         {
@@ -30,6 +31,7 @@ namespace CursedIsland
                 menu = !level;
             }
         }
+
     }
 
 
@@ -39,7 +41,7 @@ namespace CursedIsland
         private SpriteBatch _spriteBatch;
 
         private InputManager _inputManager = new InputManager();
-        private GameManager _gameManager;
+        private GameManager _gameManager = new GameManager();
         private TitleScreen titleScreen = new TitleScreen();
         private GameLevel gameLevel = new GameLevel();
 
@@ -58,7 +60,8 @@ namespace CursedIsland
             _graphics.ApplyChanges();
 
             _gameManager.Menu = true;
-            titleScreen.Initialize();
+            titleScreen.Initialize(Content);
+            gameLevel.Initialize(Content);
 
             base.Initialize();
         }
@@ -85,24 +88,34 @@ namespace CursedIsland
 
             // TODO: Add your update logic here
 
-            if (_gameManager.Menu)
-                titleScreen.Update(gameTime, _inputManager);
+            if (_gameManager.restart)
+            {
+                _gameManager.Menu = true;
+                _gameManager.restart = false;
+                gameLevel.Reset(Content);
+            }
+            else if (_gameManager.Menu)
+            {
+                titleScreen.Update(gameTime, _gameManager, _inputManager);
+            }
             else
-                gameLevel.Update(gameTime, _inputManager);
+            {
+                gameLevel.Update(gameTime, _gameManager, _inputManager);
+            }
 
-            base.Update(gameTime);
+           base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Bisque);
 
             _spriteBatch.Begin();
-
+            
             if (_gameManager.Menu)
-                titleScreen.Draw(_spriteBatch, gameTime);
+                titleScreen.Draw(GraphicsDevice, _spriteBatch, gameTime);
             else
-                gameLevel.Draw(_spriteBatch, gameTime);
+                gameLevel.Draw(GraphicsDevice, _spriteBatch, gameTime);
 
             _spriteBatch.End();
 
