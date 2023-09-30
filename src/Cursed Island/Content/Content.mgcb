@@ -116,6 +116,18 @@
 /processorParam:TextureFormat=Color
 /build:jungle_person.png
 
+#begin ouch.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ouch.wav
+
+#begin pianomoment.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:pianomoment.mp3
+
 #begin SamuraiBlast.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using CursedIsland.StartMenu;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace CursedIsland.Level
 {
@@ -13,7 +15,8 @@ namespace CursedIsland.Level
         //private List<Spider> _spiders;
 
         private List<Cactus> _cactuses = new List<Cactus>();
-
+        private SoundEffect _ouchSound;
+        private SoundEffectInstance _ouchSoundInstance;
         private Random random = new Random();
 
 
@@ -50,6 +53,8 @@ namespace CursedIsland.Level
             }
 
             _mainCharacter.LoadContent(content);
+            _ouchSound = content.Load<SoundEffect>("ouch");
+            _ouchSoundInstance = _ouchSound.CreateInstance();
         }
         public override void Update(GameTime gameTime, GameManager gameManager, InputManager inputManager)
         {
@@ -65,6 +70,7 @@ namespace CursedIsland.Level
             {
                 if (c.Bounds.CollidesWith(_mainCharacter.Bounds))
                 {
+                    _ouchSoundInstance.Play();
                     gameManager.restart = true;
                     return;
                 }
@@ -76,7 +82,6 @@ namespace CursedIsland.Level
             {
                 c.Draw(graphicsDevice, spriteBatch);
             }
-
 
             _mainCharacter.Draw(graphicsDevice, spriteBatch);
         }

@@ -3,6 +3,7 @@ using CursedIsland.Level;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace CursedIsland
 {
@@ -44,6 +45,7 @@ namespace CursedIsland
         private GameManager _gameManager = new GameManager();
         private TitleScreen titleScreen = new TitleScreen();
         private GameLevel gameLevel = new GameLevel();
+        private Song backgroundMusic;
 
         public CursedIsland()
         {
@@ -72,7 +74,8 @@ namespace CursedIsland
 
             titleScreen.LoadContent(Content);
             gameLevel.LoadContent(Content);
-
+            backgroundMusic = Content.Load<Song>("pianomoment");
+            MediaPlayer.Play(backgroundMusic);
             // TODO: use this.Content to load your game content here
         }
 

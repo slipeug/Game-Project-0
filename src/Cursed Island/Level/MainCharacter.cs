@@ -42,7 +42,7 @@ namespace CursedIsland.Level
                     newPosition.X + texture.Width / 8 * scale < GlobalVariables.WINDOW_WIDTH &&
                     newPosition.Y + texture.Height * scale < GlobalVariables.WINDOW_HEIGHT
             )
-                position = newPosition;
+                position = newPosition; 
 
             bounds.X = position.X;
             bounds.Y = position.Y;
