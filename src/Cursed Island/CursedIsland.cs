@@ -1,5 +1,6 @@
 ﻿using CursedIsland.StartMenu;
 using CursedIsland.Level;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -113,7 +114,17 @@ namespace CursedIsland
         {
             GraphicsDevice.Clear(Color.Bisque);
 
-            _spriteBatch.Begin();
+            float ms = (float)gameTime.TotalGameTime.TotalSeconds;
+            Matrix transformationMatrix = Matrix.Identity;
+            if (_gameManager.Menu)
+            {
+                float windowHeight = GraphicsDevice.Viewport.Height;
+                float windowWidth = GraphicsDevice.Viewport.Width;
+                transformationMatrix = Matrix.CreateTranslation( - windowWidth / 2, - windowHeight / 2, 0);
+                transformationMatrix *= Matrix.CreateScale(1.05f + MathF.Cos(ms) / 35, 1.05f + MathF.Cos(ms) / 35, 1);
+                transformationMatrix *= Matrix.CreateTranslation(windowWidth / 2, windowHeight / 2, 0);
+            }
+            _spriteBatch.Begin(transformMatrix: transformationMatrix);
             
             if (_gameManager.Menu)
                 titleScreen.Draw(GraphicsDevice, _spriteBatch, gameTime);
