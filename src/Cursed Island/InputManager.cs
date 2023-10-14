@@ -53,7 +53,8 @@ namespace CursedIsland
             #region Direction Updating
 
             // Get direction from the mouse
-            Direction = currentGamePadState.ThumbSticks.Right * 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //Direction = currentGamePadState.ThumbSticks.Right * 100 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Direction = new Vector2(0, 0);
 
             // Get direction from the keyboard
             if (currentKeyboardState.IsKeyDown(Keys.Left) || currentKeyboardState.IsKeyDown(Keys.A))

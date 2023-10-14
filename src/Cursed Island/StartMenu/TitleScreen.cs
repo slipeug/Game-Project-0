@@ -34,7 +34,7 @@ namespace CursedIsland.StartMenu
             _skull = new Skull();
         }
 
-        public override void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content, Game game = null)
         {
             _mainMenu.LoadContent(content);
             _background.LoadContent(content);

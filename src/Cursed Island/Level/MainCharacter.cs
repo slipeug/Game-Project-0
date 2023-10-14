@@ -8,10 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using CursedIsland.Collisions;
 using CursedIsland.StartMenu;
+using CursedIsland.Particles;
 
 namespace CursedIsland.Level
 {
-    public class MainCharacter : AnimatedSprite
+    public class MainCharacter : AnimatedSprite, IParticleEmitter
     {
         const float scale = 3f;
         private static readonly Vector2 InitPos = new Vector2(20, 20);
@@ -20,20 +21,32 @@ namespace CursedIsland.Level
 
         public BoundingRectangle Bounds => bounds;
 
-        public void LoadContent(ContentManager content)
+        public Vector2 Position { get { return position + new Vector2(bounds.Width / 2, bounds.Height - 5); }  }
+        public Vector2 Velocity { get; private set; }
+
+        private DirtParticleSystem _dirt;
+
+        public void LoadContent(ContentManager content, Game game)
         {
             position = InitPos;
+            _dirt = new DirtParticleSystem(game, this);
+            _dirt.LoadContent();
             LoadContent(content, "jungle_person", 0.1f, 8, 1);
         }
 
         public void Reset()
         {
             position = InitPos;
+            //_dirt.LoadContent();
         }
 
         public void Update(GameTime gameTime, InputManager inputManager)
         {
+            _dirt.Update(gameTime);
+
             float speed = 50 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            Velocity = inputManager.Direction;
 
             Vector2 newPosition = position + inputManager.Direction * speed;
             if ( 
@@ -50,9 +63,10 @@ namespace CursedIsland.Level
             base.Update(gameTime, inputManager);
         }
 
-        public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
             Draw(graphicsDevice, spriteBatch, Color.White, scale);
+            _dirt.Draw(gameTime);
         }
     }
 }

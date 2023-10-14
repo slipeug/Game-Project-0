@@ -74,7 +74,7 @@ namespace CursedIsland
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             titleScreen.LoadContent(Content);
-            gameLevel.LoadContent(Content);
+            gameLevel.LoadContent(Content, this);
             backgroundMusic = Content.Load<Song>("pianomoment");
             MediaPlayer.Play(backgroundMusic);
             // TODO: use this.Content to load your game content here
@@ -96,7 +96,7 @@ namespace CursedIsland
             {
                 _gameManager.Menu = true;
                 _gameManager.restart = false;
-                gameLevel.Reset(Content);
+                gameLevel.Reset(Content, this);
             }
             else if (_gameManager.Menu)
             {
