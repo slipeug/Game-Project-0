@@ -85,7 +85,10 @@ namespace CursedIsland
             _inputManager.Update(gameTime);
 
             if (_inputManager.Exit)
+            {
+                gameLevel.Serialize();
                 Exit();
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 _gameManager.Level = true;

@@ -5,12 +5,18 @@ using Microsoft.Xna.Framework;
 using System;
 using CursedIsland.StartMenu;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Media;
+using System.IO;
+using System.Linq;
+using System.Reflection.Metadata;
+
 
 namespace CursedIsland.Level
 {
     public class GameLevel : Scene
     {
+        const string filePath = "savedGame.dat";
+
+
         private MainCharacter _mainCharacter = new MainCharacter();
         //private List<Spider> _spiders;
 
@@ -23,19 +29,86 @@ namespace CursedIsland.Level
 
         public override void Initialize(ContentManager content)
         {
-            for(int i = 0; i < 10; i++)
+            if (File.Exists(filePath))
             {
-                _cactuses.Add(new Cactus(
-                    new Vector2(
-                        random.Next(20, GlobalVariables.WINDOW_WIDTH),
-                        random.Next(20, GlobalVariables.WINDOW_HEIGHT)
-                    )
-                ));
+                this.Deserialize();
             }
+            else
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    _cactuses.Add(new Cactus(
+                        new Vector2(
+                            random.Next(20, GlobalVariables.WINDOW_WIDTH),
+                            random.Next(20, GlobalVariables.WINDOW_HEIGHT)
+                        )
+                    ));
+                }
+            }
+
 
             foreach (var c in _cactuses)
             {
                 c.LoadContent(content);
+            }
+        }
+
+
+        public void Serialize()
+        {
+            List<int> arr = new List<int>();
+
+            foreach (var c in _cactuses)
+            {
+                arr.Add((int)c.position.X);
+                arr.Add((int)c.position.Y);
+            }
+
+            try
+            {
+                string outputString = string.Join(" ", arr); // Convert the array to a space separated string
+
+                File.WriteAllText(filePath, outputString);
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred while writing to the file: " + e.Message);
+            }
+        }
+
+        private void Deserialize()
+        {
+            // Open the file for reading
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line = reader.ReadLine(); // Read a line from the file
+
+                if (line != null)
+                {
+                    // Split the line into individual integers
+                    int[] integers = line.Split(' ').Select(int.Parse).ToArray();
+
+                    // Now, you have an array of integers from the file
+                    if (integers.Length % 2 == 0)
+                    {
+                        for (int i = 0; i < integers.Length; i += 2)
+                        {
+                            int firstNumber = integers[i];
+                            int secondNumber = integers[i + 1];
+
+                            _cactuses.Add(new Cactus(
+                                new Vector2(
+                                    firstNumber,
+                                    secondNumber
+                                )
+                            ));
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("The file is empty or reached the end.");
+                }
             }
         }
 
@@ -83,14 +156,13 @@ namespace CursedIsland.Level
         {
             _tileMap.Draw(gameTime, spriteBatch);
 
+            _mainCharacter.Draw(gameTime, graphicsDevice, spriteBatch);
 
             foreach (var c in _cactuses)
             {
                 c.Draw(graphicsDevice, spriteBatch);
             }
 
-
-            _mainCharacter.Draw(gameTime, graphicsDevice, spriteBatch);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace CursedIsland
 {
     public class AnimatedSprite
     {
-        protected Vector2 position;
+        public Vector2 position;
         protected Texture2D texture;
 
         private bool swapDirection = false;
