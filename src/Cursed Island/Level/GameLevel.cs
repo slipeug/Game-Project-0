@@ -29,24 +29,17 @@ namespace CursedIsland.Level
 
         public override void Initialize(ContentManager content)
         {
-            if (File.Exists(filePath))
-            {
-                this.Deserialize();
-            }
-            else
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    _cactuses.Add(new Cactus(
-                        new Vector2(
-                            random.Next(20, GlobalVariables.WINDOW_WIDTH),
-                            random.Next(20, GlobalVariables.WINDOW_HEIGHT)
-                        )
-                    ));
-                }
-            }
 
-
+            for (int i = 0; i < 10; i++)
+            {
+                _cactuses.Add(new Cactus(
+                    new Vector2(
+                        random.Next(20, GlobalVariables.WINDOW_WIDTH),
+                        random.Next(20, GlobalVariables.WINDOW_HEIGHT)
+                    )
+                ));
+            }
+            
             foreach (var c in _cactuses)
             {
                 c.LoadContent(content);
@@ -121,7 +114,15 @@ namespace CursedIsland.Level
 
         public override void LoadContent(ContentManager content, Game game)
         {
-            foreach(var c in _cactuses)
+
+            if (File.Exists(filePath))
+            {
+                _cactuses.Clear();
+                this.Deserialize();
+            }
+            
+
+            foreach (var c in _cactuses)
             {
                 c.LoadContent(content);
             }
