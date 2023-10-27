@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\TilemapPipeline\bin\Release\net6.0\TilemapPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -165,4 +166,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:spots.png
+
+#begin tiles.tmap
+/importer:TilemapImporter
+/processor:TilemapProcessor
+/processorParam:Scale=2
+/build:tiles.tmap
 

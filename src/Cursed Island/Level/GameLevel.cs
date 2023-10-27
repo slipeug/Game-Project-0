@@ -18,7 +18,8 @@ namespace CursedIsland.Level
         private SoundEffect _ouchSound;
         private SoundEffectInstance _ouchSoundInstance;
         private Random random = new Random();
-      
+
+        private Tilemap _tileMap;
 
         public override void Initialize(ContentManager content)
         {
@@ -52,8 +53,10 @@ namespace CursedIsland.Level
                 c.LoadContent(content);
             }
 
+            _tileMap = content.Load<Tilemap>("tiles");
             _mainCharacter.LoadContent(content, game);
             _ouchSound = content.Load<SoundEffect>("ouch");
+
             _ouchSoundInstance = _ouchSound.CreateInstance();
         }
         public override void Update(GameTime gameTime, GameManager gameManager, InputManager inputManager)
@@ -78,10 +81,14 @@ namespace CursedIsland.Level
         }
         public override void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, GameTime gameTime)
         {
+            _tileMap.Draw(gameTime, spriteBatch);
+
+
             foreach (var c in _cactuses)
             {
                 c.Draw(graphicsDevice, spriteBatch);
             }
+
 
             _mainCharacter.Draw(gameTime, graphicsDevice, spriteBatch);
         }
