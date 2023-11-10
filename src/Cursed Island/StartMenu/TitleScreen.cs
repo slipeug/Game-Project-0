@@ -65,7 +65,6 @@ namespace CursedIsland.StartMenu
             _spider.Draw(graphicsDevice, spriteBatch);
             _skull.Draw(graphicsDevice, spriteBatch);
 
-
         }
     }
 }

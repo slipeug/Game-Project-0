@@ -128,13 +128,18 @@ namespace CursedIsland
                 transformationMatrix *= Matrix.CreateTranslation(windowWidth / 2, windowHeight / 2, 0);
             }
             _spriteBatch.Begin(transformMatrix: transformationMatrix);
-            
-            if (_gameManager.Menu)
-                titleScreen.Draw(GraphicsDevice, _spriteBatch, gameTime);
-            else
-                gameLevel.Draw(GraphicsDevice, _spriteBatch, gameTime);
 
-            _spriteBatch.End();
+            if (_gameManager.Menu)
+            {
+                titleScreen.Draw(GraphicsDevice, _spriteBatch, gameTime);
+                _spriteBatch.End();
+            }
+            else
+            {
+                gameLevel.Draw(GraphicsDevice, _spriteBatch, gameTime);
+                _spriteBatch.End();
+                gameLevel.Draw3d(GraphicsDevice);
+            }
 
 
             base.Draw(gameTime);
