@@ -12,9 +12,13 @@ namespace CursedIsland.Level
         private VertexBuffer vertexBuffer;
         private IndexBuffer indices;
         private BasicEffect effect;
+        private Vector2 position;
 
-        public Crystal3D(GraphicsDevice graphicsDevice)
+
+        public Crystal3D(GraphicsDevice graphicsDevice, Vector2 position)
         {
+            this.position = position;
+
             var vertexData = new VertexPositionColor[]
             {
                 new VertexPositionColor(new Vector3(0, 0.5f, 0), Color.Red),
@@ -70,7 +74,7 @@ namespace CursedIsland.Level
         {
             float angle = (float)gameTime.TotalGameTime.TotalSeconds;
             // Look at the cube from farther away while spinning around it
-            effect.View = Matrix.CreateRotationY(angle) * Matrix.CreateLookAt(
+            effect.View = Matrix.CreateRotationY(angle) * Matrix.CreateTranslation(new Vector3(position, 0)) * Matrix.CreateLookAt(
                 new Vector3(0, 1, -10),
                 Vector3.Zero,
                 Vector3.Up

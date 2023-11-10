@@ -21,7 +21,7 @@ namespace CursedIsland.Level
         //private List<Spider> _spiders;
 
         private List<Cactus> _cactuses = new List<Cactus>();
-        private Crystal3D _crystal;
+        private List<Crystal3D> _crystalLives = new List<Crystal3D>();
         private SoundEffect _ouchSound;
         private SoundEffectInstance _ouchSoundInstance;
         private Random random = new Random();
@@ -122,9 +122,11 @@ namespace CursedIsland.Level
                 this.Deserialize();
             }
             
-            _crystal = new Crystal3D(game.GraphicsDevice);
-
-            foreach (var c in _cactuses)
+            for (int i =0; i < 5; i++)
+            {
+                    _crystalLives.Add(new Crystal3D(game.GraphicsDevice, new Vector2((float)(3 + i), -3.5f)));
+            };
+                foreach (var c in _cactuses)
             {
                 c.LoadContent(content);
             }
@@ -135,6 +137,7 @@ namespace CursedIsland.Level
 
             _ouchSoundInstance = _ouchSound.CreateInstance();
         }
+
         public override void Update(GameTime gameTime, GameManager gameManager, InputManager inputManager)
         {
             _mainCharacter.Update(gameTime, inputManager);
@@ -144,7 +147,10 @@ namespace CursedIsland.Level
                 c.Update(gameTime);
             }
 
-            _crystal.Update(gameTime);
+            foreach (var c in _crystalLives)
+            {
+                c.Update(gameTime);
+            }
 
             foreach (var c in _cactuses)
             {
@@ -170,7 +176,10 @@ namespace CursedIsland.Level
 
         public void Draw3d(GraphicsDevice graphicsDevice)
         {
-            _crystal.Draw(graphicsDevice);
+            foreach (var c in _crystalLives)
+            {
+                c.Draw(graphicsDevice);
+            }
         }
     }
 }
