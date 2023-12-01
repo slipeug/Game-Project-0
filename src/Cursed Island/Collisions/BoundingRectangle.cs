@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace CursedIsland.Collisions
 {
@@ -42,6 +43,19 @@ namespace CursedIsland.Collisions
         public bool CollidesWith(BoundingCircle other)
         {
             return CollisionHelper.Collides(other, this);
+        }
+
+        public void Draw(GraphicsDevice graphicsDevice, SpriteBatch _spriteBatch)
+        {
+            // Load a 1x1 pixel texture to represent the rectangle
+            Texture2D rectangleTexture = new Texture2D(graphicsDevice, 1, 1);
+            rectangleTexture.SetData(new Color[] { Color.White });
+
+            // Set the initial position and size of the rectangle
+            Rectangle rectanglePosition = new Rectangle((int) X, (int) Y, (int) Width, (int) Height);
+
+            _spriteBatch.Draw(rectangleTexture, rectanglePosition, Color.Red);
+
         }
     }
 }

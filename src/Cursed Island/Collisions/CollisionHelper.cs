@@ -35,12 +35,24 @@ namespace CursedIsland.Collisions
 
         public static bool Collides (BoundingCircle c, BoundingRectangle r)
         {
-            float nearestX = MathHelper.Clamp(c.Center.X, r.Left, r.Right);
-            float nearestY = MathHelper.Clamp(c.Center.Y, r.Top, r.Bottom);
+            double closestX = Math.Max(r.X, Math.Min(c.Center.X, r.X + r.Width));
+            double closestY = Math.Max(r.Y, Math.Min(c.Center.Y, r.Y + r.Height));
 
-            return Math.Pow(c.Radius, 2) >=
-                Math.Pow(c.Center.X - nearestX, 2) +
-                Math.Pow(c.Center.Y - nearestY, 2);
+            // Calculate the distance between the closest point and the circle's center
+            double distance = Math.Sqrt(Math.Pow(c.Center.X - closestX, 2) + Math.Pow(c.Center.Y - closestY, 2));
+
+            // If the distance is less than or equal to the circle's radius, there is an intersection
+            return distance <= c.Radius;
+
+
+
+            //float nearestX = MathHelper.Clamp(c.Center.X, r.Left, r.Right);
+            //float nearestY = MathHelper.Clamp(c.Center.Y, r.Top, r.Bottom);
+
+            //float distanceSquared = (nearestX - c.Center.X) * (nearestX - c.Center.X) +
+            //                        (nearestY - c.Center.Y) * (nearestY - c.Center.Y);
+
+            //return distanceSquared <= (c.Radius * c.Radius);
         }
 
         public static bool Collides(BoundingRectangle r, BoundingCircle c) => Collides(c, r);

@@ -12,28 +12,23 @@ namespace CursedIsland.Level
     public class Cactus : AnimatedSprite
     {
         const float size = 0.2f;
-        private BoundingRectangle bounds = new BoundingRectangle(0, 0, 512 * size, 512 * size);
+        private BoundingRectangle bounds;
 
         public BoundingRectangle Bounds => bounds;
 
         public Cactus(Vector2 position) 
         {
             base.position = position;
+            this.bounds = new BoundingRectangle(position.X + 20, position.Y + 20, 300 * size, 300 * size);
         }
 
         public void LoadContent(ContentManager content)
         {
             LoadContent(content, "cactus", 100f);
         }
-
-        public void Update(GameTime gameTime)
-        {
-            bounds.X = position.X;
-            bounds.Y = position.Y;
-        }
-
         public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
+            bounds.Draw(graphicsDevice, spriteBatch);
             base.Draw(graphicsDevice, spriteBatch, Color.White, size);
         }
 

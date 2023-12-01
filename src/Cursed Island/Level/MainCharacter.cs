@@ -65,6 +65,7 @@ namespace CursedIsland.Level
 
         public void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
+            bounds.Draw(graphicsDevice, spriteBatch);
             Draw(graphicsDevice, spriteBatch, Color.White, scale);
             _dirt.Draw(gameTime);
         }

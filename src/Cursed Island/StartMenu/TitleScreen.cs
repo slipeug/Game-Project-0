@@ -29,7 +29,7 @@ namespace CursedIsland.StartMenu
         {
             _background = new StartMenuBackground();
             _mainMenu = new MainMenu();
-            _gem = new Gem();
+            _gem = new Gem(new Vector2(840, 175));
             _spider = new Spider();
             _skull = new Skull();
         }

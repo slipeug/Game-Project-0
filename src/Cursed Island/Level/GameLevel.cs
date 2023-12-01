@@ -21,6 +21,7 @@ namespace CursedIsland.Level
         //private List<Spider> _spiders;
 
         private List<Cactus> _cactuses = new List<Cactus>();
+        private List<Gem> _gems = new List<Gem>();
         private List<Crystal3D> _crystalLives = new List<Crystal3D>();
         private SoundEffect _ouchSound;
         private SoundEffectInstance _ouchSoundInstance;
@@ -33,18 +34,16 @@ namespace CursedIsland.Level
 
             for (int i = 0; i < 10; i++)
             {
-                _cactuses.Add(new Cactus(
+                Cactus c = new Cactus(
                     new Vector2(
-                        random.Next(20, GlobalVariables.WINDOW_WIDTH),
-                        random.Next(20, GlobalVariables.WINDOW_HEIGHT)
+                        random.Next(20, GlobalVariables.WINDOW_WIDTH - 50),
+                        random.Next(20, GlobalVariables.WINDOW_HEIGHT - 50)
                     )
-                ));
+                );
+                c.LoadContent( content );
+                _cactuses.Add(c);
             }
 
-            foreach (var c in _cactuses)
-            {
-                c.LoadContent(content);
-            }
         }
 
 
@@ -115,13 +114,30 @@ namespace CursedIsland.Level
 
         public override void LoadContent(ContentManager content, Game game)
         {
-
             if (File.Exists(filePath))
             {
                 _cactuses.Clear();
                 this.Deserialize();
             }
-            
+
+            for (int i = 0; i < 10; i++)
+            {
+                Gem g;
+                do
+                {
+                    g = new Gem(
+                        new Vector2(
+                            random.Next(20, GlobalVariables.WINDOW_WIDTH - 50),
+                            random.Next(20, GlobalVariables.WINDOW_HEIGHT - 50)
+                        )
+                    );
+                }
+                while (g.NotCollide(_cactuses));
+
+                g.LoadContent(content);
+                _gems.Add(g);
+            }
+
             for (int i =0; i < 5; i++)
             {
                     _crystalLives.Add(new Crystal3D(game.GraphicsDevice, new Vector2((float)(3 + i), -3.5f)));
@@ -141,11 +157,6 @@ namespace CursedIsland.Level
         public override void Update(GameTime gameTime, GameManager gameManager, InputManager inputManager)
         {
             _mainCharacter.Update(gameTime, inputManager);
-
-            foreach (var c in _cactuses)
-            {
-                c.Update(gameTime);
-            }
 
             foreach (var c in _crystalLives)
             {
@@ -171,6 +182,11 @@ namespace CursedIsland.Level
             foreach (var c in _cactuses)
             {
                 c.Draw(graphicsDevice, spriteBatch);
+            }
+
+            foreach (var g in _gems)
+            {
+                g.Draw(graphicsDevice, spriteBatch);
             }
         }
 
