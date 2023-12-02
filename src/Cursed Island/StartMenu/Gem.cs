@@ -19,7 +19,8 @@ namespace CursedIsland.StartMenu
         public Gem (Vector2 position)
         {
             base.position = position;
-            this.bounds = new BoundingCircle(new Vector2(position.X, position.Y), 40);
+            base.scale = 0.8f;
+            this.bounds = new BoundingCircle(new Vector2(position.X + 25 * scale, position.Y + 25 * scale), 15 * scale);
         }
         public void LoadContent(ContentManager content)
         {
@@ -34,7 +35,7 @@ namespace CursedIsland.StartMenu
         public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
             Bounds.Draw(graphicsDevice, spriteBatch);
-            Draw(graphicsDevice, spriteBatch, Color.White, 0.8f);
+            Draw(graphicsDevice, spriteBatch, Color.White);
         }
 
         public bool NotCollide (List<Cactus> cactuses)

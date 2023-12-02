@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Audio;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Collections;
 
 
 namespace CursedIsland.Level
@@ -22,7 +23,11 @@ namespace CursedIsland.Level
 
         private List<Cactus> _cactuses = new List<Cactus>();
         private List<Gem> _gems = new List<Gem>();
+        private int _gemsAmount = 10;
+        private int _gemsCollected = 0;
         private List<Crystal3D> _crystalLives = new List<Crystal3D>();
+        private int _livesAmount = 5;
+        private int _livesLeft = 5;
         private SoundEffect _ouchSound;
         private SoundEffectInstance _ouchSoundInstance;
         private Random random = new Random();
@@ -31,6 +36,8 @@ namespace CursedIsland.Level
 
         public override void Initialize(ContentManager content)
         {
+            _livesLeft = 5;
+            _gemsCollected = 0;
 
             for (int i = 0; i < 10; i++)
             {
@@ -107,7 +114,6 @@ namespace CursedIsland.Level
 
         public void Reset (ContentManager content, Game game)
         {
-            //_mainCharacter.Reset(game);
             _cactuses.Clear();
             Initialize(content);
         }
@@ -120,7 +126,7 @@ namespace CursedIsland.Level
                 this.Deserialize();
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < _gemsAmount; i++)
             {
                 Gem g;
                 do
@@ -138,11 +144,12 @@ namespace CursedIsland.Level
                 _gems.Add(g);
             }
 
-            for (int i =0; i < 5; i++)
+            for (int i = 0; i < _livesAmount; i++)
             {
-                    _crystalLives.Add(new Crystal3D(game.GraphicsDevice, new Vector2((float)(3 + i), -3.5f)));
+                _crystalLives.Add(new Crystal3D(game.GraphicsDevice, new Vector2((float)(3 + i), -3.5f)));
             };
-                foreach (var c in _cactuses)
+
+            foreach (var c in _cactuses)
             {
                 c.LoadContent(content);
             }
@@ -168,10 +175,28 @@ namespace CursedIsland.Level
                 if (c.Bounds.CollidesWith(_mainCharacter.Bounds))
                 {
                     _ouchSoundInstance.Play();
-                    gameManager.restart = true;
-                    return;
+                    _livesLeft--;
+                    _mainCharacter.Reset();
+
+                    if (_livesLeft == 0)
+                    {
+                        gameManager.restart = true;
+                        return;
+                    }
                 }
             }
+
+            foreach (var g in _gems)
+            {
+                if (g.Bounds.CollidesWith(_mainCharacter.Bounds))
+                {
+                    //_ouchSoundInstance.Play();
+                    _gemsCollected++;
+                    _gems.Remove(g);
+                    break;
+                }
+            }
+
         }
         public override void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, GameTime gameTime)
         {
@@ -192,9 +217,9 @@ namespace CursedIsland.Level
 
         public void Draw3d(GraphicsDevice graphicsDevice)
         {
-            foreach (var c in _crystalLives)
+            for (int i = _livesAmount - 1; i >= _livesAmount - _livesLeft; i--)
             {
-                c.Draw(graphicsDevice);
+                _crystalLives[i].Draw(graphicsDevice);
             }
         }
     }

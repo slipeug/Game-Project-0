@@ -96,7 +96,7 @@ namespace CursedIsland
 
         public void Draw (GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Color color, float scale)
         {
-            base.Draw(graphicsDevice, spriteBatch, color, scale);
+            base.Draw(graphicsDevice, spriteBatch, color);
         }
 
     }

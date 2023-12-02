@@ -14,6 +14,7 @@ namespace CursedIsland.StartMenu
     {
         public void LoadContent(ContentManager content)
         {
+            base.scale = 0.15f;
             LoadContent(content, "spider", 100f);
         }
 
@@ -27,8 +28,7 @@ namespace CursedIsland.StartMenu
 
         public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
-            float scale = 0.15f;
-            Draw(graphicsDevice, spriteBatch, Color.White, scale);
+            Draw(graphicsDevice, spriteBatch, Color.White);
 
             Vector2 origin = new Vector2(
                 position.X + texture.Width / 2 * scale,

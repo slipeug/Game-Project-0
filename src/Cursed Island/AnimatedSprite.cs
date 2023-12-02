@@ -17,6 +17,7 @@ namespace CursedIsland
         protected Texture2D texture;
 
         private bool swapDirection = false;
+        protected float scale;
 
         private int framesHorizontally;
         private int framesVertically;
@@ -65,7 +66,7 @@ namespace CursedIsland
             }
         }
 
-        public void Draw (GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Color color = default(Color), float scale = 1f)
+        public void Draw (GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Color color = default(Color))
         {
             if (color == default(Color))
                 color = Color.White;

@@ -14,10 +14,9 @@ namespace CursedIsland.Level
 {
     public class MainCharacter : AnimatedSprite, IParticleEmitter
     {
-        const float scale = 3f;
         private static readonly Vector2 InitPos = new Vector2(20, 20);
 
-        private BoundingRectangle bounds = new BoundingRectangle(0, 0, 23 * scale, 34 * scale);
+        private BoundingRectangle bounds;
 
         public BoundingRectangle Bounds => bounds;
 
@@ -28,7 +27,9 @@ namespace CursedIsland.Level
 
         public void LoadContent(ContentManager content, Game game)
         {
+            scale = 3f;
             position = InitPos;
+            bounds = new BoundingRectangle(position.X, position.Y, 23 * scale, 34 * scale);
             _dirt = new DirtParticleSystem(game, this);
             _dirt.LoadContent();
             LoadContent(content, "jungle_person", 0.1f, 8, 1);
@@ -66,7 +67,7 @@ namespace CursedIsland.Level
         public void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
             bounds.Draw(graphicsDevice, spriteBatch);
-            Draw(graphicsDevice, spriteBatch, Color.White, scale);
+            Draw(graphicsDevice, spriteBatch, Color.White);
             _dirt.Draw(gameTime);
         }
     }

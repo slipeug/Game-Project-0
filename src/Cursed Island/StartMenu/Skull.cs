@@ -15,7 +15,8 @@ namespace CursedIsland.StartMenu
     {
         public void LoadContent(ContentManager content)
         {
-            position = new Vector2(295, 245);
+            base.scale = 0.23f;
+            base. position = new Vector2(295, 245);
             LoadContent(content, "catrina", 0.07f);
         }
 
@@ -26,8 +27,7 @@ namespace CursedIsland.StartMenu
 
         public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
-            float scale = 0.23f;
-            Draw(graphicsDevice, spriteBatch, Color.Orange, scale);
+            Draw(graphicsDevice, spriteBatch, Color.Orange);
         }
     }
 }
