@@ -24,7 +24,7 @@ namespace CursedIsland.Level
         }
         public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
-            bounds.Draw(graphicsDevice, spriteBatch);
+            //bounds.Draw(graphicsDevice, spriteBatch);
             base.Draw(graphicsDevice, spriteBatch, Color.White);
         }
 

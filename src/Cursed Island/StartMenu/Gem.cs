@@ -34,7 +34,7 @@ namespace CursedIsland.StartMenu
 
         public void Draw(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
-            Bounds.Draw(graphicsDevice, spriteBatch);
+            //Bounds.Draw(graphicsDevice, spriteBatch);
             Draw(graphicsDevice, spriteBatch, Color.White);
         }
 

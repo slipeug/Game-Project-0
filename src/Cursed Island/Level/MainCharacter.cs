@@ -28,7 +28,6 @@ namespace CursedIsland.Level
         public void LoadContent(ContentManager content, Game game)
         {
             scale = 3f;
-            position = InitPos;
             bounds = new BoundingRectangle(position.X, position.Y, 23 * scale, 34 * scale);
             _dirt = new DirtParticleSystem(game, this);
             _dirt.LoadContent();
@@ -66,7 +65,7 @@ namespace CursedIsland.Level
 
         public void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch)
         {
-            bounds.Draw(graphicsDevice, spriteBatch);
+            //bounds.Draw(graphicsDevice, spriteBatch);
             Draw(graphicsDevice, spriteBatch, Color.White);
             _dirt.Draw(gameTime);
         }

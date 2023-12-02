@@ -41,6 +41,7 @@ namespace CursedIsland.Level
         {
             _livesLeft = 5;
             _gemsCollected = 0;
+            _mainCharacter.Reset();
 
             for (int i = 0; i < 10; i++)
             {
@@ -54,28 +55,78 @@ namespace CursedIsland.Level
                 _cactuses.Add(c);
             }
 
+            for (int i = 0; i < _gemsAmount; i++)
+            {
+                Gem g;
+                do
+                {
+                    g = new Gem(
+                        new Vector2(
+                            random.Next(20, GlobalVariables.WINDOW_WIDTH - 50),
+                            random.Next(20, GlobalVariables.WINDOW_HEIGHT - 50)
+                        )
+                    );
+                }
+                while (
+                    g.NotCollide(_cactuses) ||
+                    g.Bounds.CollidesWith(_mainCharacter.Bounds) ||
+                    g.Bounds.CollidesWith(_startPortal.Bounds) ||
+                    g.Bounds.CollidesWith(_finishPortal.Bounds)
+                );
+
+                g.LoadContent(content);
+                _gems.Add(g);
+            }
+
         }
 
 
         public void Serialize()
         {
-            List<int> arr = new List<int>();
-
-            foreach (var c in _cactuses)
+            File.WriteAllText(filePath, "");
+            using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                arr.Add((int)c.position.X);
-                arr.Add((int)c.position.Y);
-            }
+                List<int> arr = new List<int>();
 
-            try
-            {
+                foreach (var c in _cactuses)
+                {
+                    arr.Add((int)c.position.X);
+                    arr.Add((int)c.position.Y);
+                }
+
                 string outputString = string.Join(" ", arr); // Convert the array to a space separated string
 
-                File.WriteAllText(filePath, outputString);
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine("An error occurred while writing to the file: " + e.Message);
+                writer.WriteLine(outputString);
+
+                arr.Clear();
+
+                foreach (var g in _gems)
+                {
+                    arr.Add((int)g.position.X);
+                    arr.Add((int)g.position.Y);
+                }
+
+                outputString = string.Join(" ", arr); // Convert the array to a space separated string
+                writer.WriteLine(outputString);
+
+                arr.Clear();
+
+                arr.Add((int)_mainCharacter.position.X);
+                arr.Add((int)_mainCharacter.position.Y);
+
+                outputString = string.Join(" ", arr); // Convert the array to a space separated string
+                writer.WriteLine(outputString);
+
+                arr.Clear();
+
+                arr.Add((int)_livesLeft);
+
+                outputString = string.Join(" ", arr); // Convert the array to a space separated string
+                writer.WriteLine(outputString);
+
+
+
+                writer.Close();
             }
         }
 
@@ -108,6 +159,44 @@ namespace CursedIsland.Level
                         }
                     }
                 }
+
+                line = reader.ReadLine(); // Read a line from the file
+
+                if (line != null)
+                {
+                    // Split the line into individual integers
+                    int[] integers = line.Split(' ').Select(int.Parse).ToArray();
+
+                    for (int i = 0; i < integers.Length; i += 2)
+                    {
+                        int firstNumber = integers[i];
+                        int secondNumber = integers[i + 1];
+
+                        _gems.Add(new Gem(
+                            new Vector2(
+                                firstNumber,
+                                secondNumber
+                            )
+                        ));
+                       
+                    }
+                }
+
+                line = reader.ReadLine(); // Read a line from the file
+
+                if (line != null)
+                {
+                    int[] integers = line.Split(' ').Select(int.Parse).ToArray();
+                    _mainCharacter.position = new Vector2(integers[0], integers[1]);
+                }
+
+                line = reader.ReadLine(); // Read a line from the file
+
+                if (line != null)
+                {
+                    int[] integers = line.Split(' ').Select(int.Parse).ToArray();
+                    _livesLeft = integers[0];
+                }
                 else
                 {
                     Console.WriteLine("The file is empty or reached the end.");
@@ -118,6 +207,7 @@ namespace CursedIsland.Level
         public void Reset (ContentManager content, Game game)
         {
             _cactuses.Clear();
+            _gems.Clear();
             Initialize(content);
         }
 
@@ -126,30 +216,8 @@ namespace CursedIsland.Level
             if (File.Exists(filePath))
             {
                 _cactuses.Clear();
+                _gems.Clear();
                 this.Deserialize();
-            }
-
-            for (int i = 0; i < _gemsAmount; i++)
-            {
-                Gem g;
-                do
-                {
-                    g = new Gem(
-                        new Vector2(
-                            random.Next(20, GlobalVariables.WINDOW_WIDTH - 50),
-                            random.Next(20, GlobalVariables.WINDOW_HEIGHT - 50)
-                        )
-                    );
-                }
-                while (
-                    g.NotCollide(_cactuses) ||
-                    g.Bounds.CollidesWith(_mainCharacter.Bounds) ||
-                    g.Bounds.CollidesWith(_startPortal.Bounds) ||
-                    g.Bounds.CollidesWith(_finishPortal.Bounds)
-                );
-
-                g.LoadContent(content);
-                _gems.Add(g);
             }
 
             for (int i = 0; i < _livesAmount; i++)
@@ -160,6 +228,11 @@ namespace CursedIsland.Level
             foreach (var c in _cactuses)
             {
                 c.LoadContent(content);
+            }
+
+            foreach (var g in _gems)
+            {
+                g.LoadContent(content);
             }
 
             _tileMap = content.Load<Tilemap>("tiles");
@@ -207,6 +280,13 @@ namespace CursedIsland.Level
                     _gems.Remove(g);
                     break;
                 }
+            }
+
+            if (_mainCharacter.Bounds.CollidesWith(_finishPortal.Bounds) && _gemsCollected == _gemsAmount)
+            {
+                _mainCharacter.Reset();
+                gameManager.restart = true;
+                return;
             }
 
         }
