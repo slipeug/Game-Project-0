@@ -16,8 +16,8 @@ namespace CursedIsland
         public Vector2 position;
         protected Texture2D texture;
 
-        private bool swapDirection = false;
-        protected float scale;
+        protected bool swapDirection = false;
+        protected float scale = 1.0f;
 
         private int framesHorizontally;
         private int framesVertically;
@@ -76,7 +76,6 @@ namespace CursedIsland
 
             int frameX = currentFrame % framesHorizontally;
             int frameY = currentFrame / framesHorizontally;
-
 
             Rectangle sourceRec = new Rectangle(frameX * frameWidth, frameY * frameHeight, frameWidth, frameHeight);
             SpriteEffects effects = swapDirection ? SpriteEffects.FlipHorizontally : SpriteEffects.None;

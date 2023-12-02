@@ -21,6 +21,9 @@ namespace CursedIsland.Level
         private MainCharacter _mainCharacter = new MainCharacter();
         //private List<Spider> _spiders;
 
+        private Portal _startPortal = new Portal(new Vector2(-20, 0), true);
+        private Portal _finishPortal = new Portal(new Vector2(GlobalVariables.WINDOW_WIDTH - 100, GlobalVariables.WINDOW_HEIGHT - 130));
+
         private List<Cactus> _cactuses = new List<Cactus>();
         private List<Gem> _gems = new List<Gem>();
         private int _gemsAmount = 10;
@@ -138,7 +141,12 @@ namespace CursedIsland.Level
                         )
                     );
                 }
-                while (g.NotCollide(_cactuses));
+                while (
+                    g.NotCollide(_cactuses) ||
+                    g.Bounds.CollidesWith(_mainCharacter.Bounds) ||
+                    g.Bounds.CollidesWith(_startPortal.Bounds) ||
+                    g.Bounds.CollidesWith(_finishPortal.Bounds)
+                );
 
                 g.LoadContent(content);
                 _gems.Add(g);
@@ -156,6 +164,8 @@ namespace CursedIsland.Level
 
             _tileMap = content.Load<Tilemap>("tiles");
             _mainCharacter.LoadContent(content, game);
+            _startPortal.LoadContent(content);
+            _finishPortal.LoadContent(content);
             _ouchSound = content.Load<SoundEffect>("ouch");
 
             _ouchSoundInstance = _ouchSound.CreateInstance();
@@ -163,6 +173,8 @@ namespace CursedIsland.Level
 
         public override void Update(GameTime gameTime, GameManager gameManager, InputManager inputManager)
         {
+            _startPortal.Update(gameTime);
+            _finishPortal.Update(gameTime);
             _mainCharacter.Update(gameTime, inputManager);
 
             foreach (var c in _crystalLives)
@@ -202,6 +214,8 @@ namespace CursedIsland.Level
         {
             _tileMap.Draw(gameTime, spriteBatch);
 
+            _startPortal.Draw(graphicsDevice, spriteBatch);
+            _finishPortal.Draw(graphicsDevice, spriteBatch);
             _mainCharacter.Draw(gameTime, graphicsDevice, spriteBatch);
 
             foreach (var c in _cactuses)
